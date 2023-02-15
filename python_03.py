@@ -1,28 +1,28 @@
 nombre = input("¿Cual es su nombre?")
 print(type(nombre))
 
-edad_s = input("¿Cual es su edad?")
-edad_i = int(edad_s)
-print(type(edad_i))
+edad = input("¿Cual es su edad?")
+edad = int(edad)
+print(type(edad))
 
 ciudad = input("¿Cual es su ciudad de origen?")
 print(type(ciudad))
 
-estado_civil_s = input("¿Es casado?")
-estado_civil_b = bool(estado_civil_s)
-print(type(estado_civil_b))
+estado_civil = input("¿Es casado?")
+estado_civil = bool(estado_civil)
+print(type(estado_civil))
 
-numero1_s = input("¿Digite un numero entre 1-100?")
-numero1_i = int(numero1_s)
-print(type(numero1_i))
+numeroa= input("¿Digite un numero entre 1-100?")
+numeroa = int(numeroa)
+print(type(numeroa))
 
-numero2_s = input("¿Digite un numero entre 100-200?")
-numero2_i = int(numero2_s)
-print(type(numero2_i))
+numerob = input("¿Digite un numero entre 100-200?")
+numerob = int(numerob)
+print(type(numerob))
 
-division = numero1_i/numero2_i
+division = numerob/numerob
 print(division)
 
-print(f"Mi nombre es {nombre}, mi edad es {edad_i}, soy de la ciudad de {ciudad} y mi resultado de la división es {division}")
+print(f"Mi nombre es {nombre}, mi edad es {edad}, soy de la ciudad de {ciudad} y mi resultado de la división es {division}")
 
 
