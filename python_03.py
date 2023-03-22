@@ -33,7 +33,8 @@ graduate = bool(7)
 print(graduate)
 print(type(graduate))
 
-'''Instrucciones:
+'''
+Instrucciones:
 Cree una variable llamada "nombre" y asígnale su nombre como valor (ej. "Juan").
 Cree una variable llamada "edad" y asígnale su edad como valor (ej. 30).
 Cree una variable llamada "altura" y asígnale su altura en metros (ej. 1.75).
