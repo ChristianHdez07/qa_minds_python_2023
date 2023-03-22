@@ -118,4 +118,37 @@ e = 2.71
 print(f"Mi nombre es {name}, tengo {age} años, y vivo en {city}.")
 print(f"Los valores de pi y e son aproximadamente {pi} y {e}, respectivamente.")
 
+'''
+Instrucciones (python_03.py):
+Crear un archivo de python con el nombre python_03.py
+Pregunte al usuario que nombre tiene,  almacena el valor en una variable.
+Pregunta al usuario que edad tiene, almacena el valor en una variable.
+Pregunta al usuario cual es su ciudad, almacena el valor en una variable.
+Pregunta al usuario si está casado, almacena el valor en una variable.
+Pídele al usuario un número entre 1-100
+Pídele al usuario un número entre 100-200
+Imprime la siguiente información en pantalla:
+Mi nombre es <Nombre>, mi edad es <edad>, soy de la ciudad de <cuidad> y mi resultado es <división número a entre número b>
+Sube al ejercicio a tu repositorio de github.
+'''
+
+name = input("¿Cual es tu nombre? ")
+
+age = int(input("¿Cual es tu edad? "))
+
+city = input("¿En que ciudad vives? ")
+
+wedded = input("¿En casado? ")
+
+n1 = int(input("Ingresa un numero del 1 al 100: "))
+
+n2 = int(input("Ingresa un numero del 100 al 200: "))
+
+result = n1/n2
+
+print(f"Mi nombre es {name}, mi edad es {age}, soy de la ciudad de {city} y mi resultado es {result}")
+
+
+
+
 
