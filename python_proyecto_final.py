@@ -14,6 +14,7 @@ Los jugadores también tendrán un contador de partidas.
 Los jugadores también tendrán un contador de puntos.
 '''
 
+import random
 from enum import Enum
 
 #######################################################################################
@@ -24,30 +25,49 @@ class Estado(Enum):
     ACTIVO = 1
     INACTIVO = 2
 
+
 class Jugador:
-    def __init__(self, nombre: str, email: str, raza: str, estado: Estado):
-        self.__nombre = nombre
-        self.__email = email
-        self.__raza = raza
-        self.__estado = estado
-
-    def obtener_nombre(self):
-        return self.__nombre
-
-    def obtener_apellido(self):
-        return self.__email
-
-    def obtener_mail(self):
-        return self.__raza
-
-    def obtener_estado(self):
-        return self.__estado
+    def __init__(self, nombre, email, raza):
+        self.nombre = nombre
+        self.email = email
+        self.raza = raza
+        self.puntos = 0
+        self.partidas = 0
+        self.activo = True
 
     def __str__(self):
-        return repr(self)
+        return f"{self.nombre} ({self.raza}) - {self.puntos} puntos, {self.partidas} partidas"
 
-    def __repr__(self):
-        return f"(nombre={self.__nombre}, email={self.__email}, raza={self.__raza} estado={self.__estado})"
+    def perder_partida(self):
+        self.puntos += 1
+        self.partidas += 1
+        self.activo = False
+
+    def ganar_partida(self):
+        self.puntos += 3
+        self.partidas += 1
+
+
+class Partida:
+    def __init__(self, jugador1, jugador2):
+        self.nombre = f"{jugador1.nombre} vs {jugador2.nombre}"
+        self.jugador1 = jugador1
+        self.jugador2 = jugador2
+        self.resultado = None
+
+    def jugar_partida(self):
+        if self.resultado is None:
+            resultado = random.choice([self.jugador1, self.jugador2])
+            if resultado == self.jugador1:
+                self.jugador1.ganar_partida()
+                self.jugador2.perder_partida()
+            else:
+                self.jugador2.ganar_partida()
+                self.jugador1.perder_partida()
+            self.resultado = resultado
+
+    def __str__(self):
+        return f"{self.nombre}: {self.resultado.nombre} gana"
 
 
 #######################################################################################
@@ -63,8 +83,15 @@ def alta():
     JUGADORES.append(jugador)
     print(f"Jugador registrado: {jugador}")
 
+
 def imprimir_header(header: str):
     print(f"{40 * '='} {header} {40 * '='}")
+
+
+def exportar_registros(jugadores):
+    with open("Torneo_Starcraft.txt", "w") as f:
+        for jugador in jugadores:
+            f.write(str(jugador) + "\n")
 
 
 #######################################################################################
@@ -76,12 +103,26 @@ MENU = {
     "alta": alta
 }
 
-# alta | salir
+# alta
 OPTIONS = ' | '.join(MENU.keys())
 
-while True:
-    action = input(f"Dar de alta jugador -> {OPTIONS}\n")
-    if action in MENU.keys():
-        MENU[action]()
-    else:
-        print(f"Salir del sistema: {action}")
+for i in range(4):
+    nombre = input(f"Ingrese el nombre del jugador {i + 1}: ")
+    email = input(f"Ingrese el email del jugador {i + 1}: ")
+    raza = input(f"Ingrese la raza del jugador {i + 1} (Terran, Zerg, Protoss): ")
+    jugador = Jugador(nombre, email, raza)
+    JUGADORES.append(jugador)
+
+jugadores_activos = [jugador for jugador in JUGADORES if jugador.activo]
+jugadores_mismo_numero_partidas = []
+while len(jugadores_mismo_numero_partidas) != 2:
+    jugador1, jugador2 = random.sample(jugadores_activos, 2)
+    if jugador1.partidas == jugador2.partidas:
+        jugadores_mismo_numero_partidas = [jugador1, jugador2]
+
+partida = Partida(jugadores_mismo_numero_partidas[0], jugadores_mismo_numero_partidas[1])
+partida.jugar_partida()
+final = Partida(jugadores_mismo_numero_partidas[0], jugadores_mismo_numero_partidas[1])
+final.jugar_partida()
+
+exportar_registros(JUGADORES)
